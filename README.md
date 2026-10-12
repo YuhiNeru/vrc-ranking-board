@@ -57,6 +57,8 @@ D1を作り、`wrangler.jsonc` の `account_id` と `database_id` を公開先�
 
 他のアカウントへ公開する際は、設定のアカウントID・DB IDを自分のものに置き換えてください。秘密鍵・Cookie・送信用tokenはリポジトリへ登録しません。公開画面にはVRChat認証情報は不要です。
 
+本サイトのVPSには送信先と専用tokenを設定済みです。毎時の集計完了時にCloudflareへ送信するため、PCを起動し続ける必要はありません。コード変更の自動公開は、CloudflareのWorker設定「Builds」でGitHubの `yuhi-neru/vrc-ranking-board` を連携すると有効になります。GitHub Actionsの検証だけでは本番公開されません。
+
 ## 検証
 
 ```powershell
@@ -79,3 +81,10 @@ npx wrangler deploy --dry-run --outdir .runtime/worker-build
 - Nodeのテスト10件、Pythonのテスト9件が成功。Cloudflareのdry-runビルドも成功。
 - 初回の履歴は1点。推移グラフ・急上昇は履歴が揃うと表示される。欠測を架空の値で補間しない。
 - 元のWorld Compassサービスは稼働中。ランキングの収集はVPS timerへ移管し、ローカルの実データサーバーは結果の読み取りだけを行う構成。
+
+## 公開版の検証結果（2026-10-12）
+
+- 15:22 JSTの集計：候補484件、日本語向け103件、人数取得失敗0件。公開画面はTOP100を表示。
+- VPSから認証付き送信が成功し、公開APIの実データ・画面・画像表示を確認。無認証の送信は401で拒否。
+- GitHubの自動検証が成功。元の収集サービスは稼働中、ランキングの毎時timerは有効。送信用tokenはVPSで権限600。
+- Cloudflare用スキルとCodex MCP認証を設定済み。MCP利用にはCodexの再起動が必要。
