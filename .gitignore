@@ -1,0 +1,10 @@
+node_modules/
+.runtime/
+.wrangler/
+.dev.vars
+__pycache__/
+*.sqlite*
+*.pem
+*.cookies
+collector/config.json
+collector/overrides.json

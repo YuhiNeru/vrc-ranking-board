@@ -1,0 +1,11 @@
+{
+  "sourceDb": "/var/lib/world-compass-collector/collector.sqlite",
+  "sourceConfig": "/var/lib/world-compass-collector/config.json",
+  "cookieFile": "/var/lib/world-compass-collector/session.cookies",
+  "dataDir": "/var/lib/vrc-ranking-board",
+  "overridesFile": "/var/lib/vrc-ranking-board/overrides.json",
+  "candidateLimit": 500,
+  "intervalSeconds": 4,
+  "ingestUrl": "",
+  "ingestTokenFile": "/var/lib/vrc-ranking-board/ingest-token"
+}

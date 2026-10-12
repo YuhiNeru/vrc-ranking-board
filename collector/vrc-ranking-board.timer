@@ -1,0 +1,11 @@
+[Unit]
+Description=Update World Watch once an hour
+
+[Timer]
+OnCalendar=*-*-* *:07:00
+RandomizedDelaySec=180
+Persistent=true
+Unit=vrc-ranking-board.service
+
+[Install]
+WantedBy=timers.target

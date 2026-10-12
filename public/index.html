@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1c27">
+  <meta name="description" content="日本語向けVRChatワールドの毎時ランキング。総同接とパブリック人数を比較して、次の行き先を探そう。">
+  <title>World Watch — VRChatワールドランキング</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/theme.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <a class="skip" href="#rankings">ランキングへ移動</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="World Watch ホーム"><span class="brand-mark" aria-hidden="true">w<span>↗</span></span>World Watch<span class="brand-sub">VRChat Worlds</span></a>
+    <nav aria-label="メイン"><a class="nav-current" href="#rankings">ランキング</a><button id="about-open" class="text-button">このランキングについて</button></nav>
+  </div></header>
+  <main class="container">
+    <section class="intro">
+      <div class="eyebrow"><span class="live-dot"></span> JAPANESE WORLD CHARTS <span class="frequency">1時間ごと更新</span></div>
+      <h1>今、みんながいるワールド。</h1>
+      <p>日本語向けワールドの人気と、パブリックの賑わいをひと目で。</p>
+      <div class="update-line"><span id="updated">データを読み込んでいます</span><button id="refresh" class="refresh" aria-label="ランキングを再読み込み">↻ <span>再読み込み</span></button></div>
+    </section>
+    <div id="notice" class="notice" hidden role="status"></div>
+    <section class="stats" aria-label="ランキングの概要">
+      <div class="stat"><span>集計対象の総同接</span><strong id="stat-total">—</strong><small>取得できた掲載対象の合計</small></div>
+      <div class="stat"><span>パブリック人数</span><strong id="stat-public">—</strong><small>APIの公開側集計</small></div>
+      <div class="stat"><span>今回の集計ワールド</span><strong id="stat-worlds">—</strong><small id="stat-pool">アクティブ上位500件から抽出</small></div>
+    </section>
+    <section id="rankings" class="ranking-section" aria-labelledby="ranking-heading">
+      <div class="ranking-title"><div><span class="eyebrow">HOURLY RANKING</span><h2 id="ranking-heading">ワールド TOP 100</h2></div><span id="result-count" class="result-count"></span></div>
+      <div class="toolbar">
+        <div class="tabs" role="group" aria-label="順位の基準"><button class="tab active" data-sort="total" aria-pressed="true">総同接 <span>人気を見る</span></button><button class="tab" data-sort="public" aria-pressed="false">パブリック <span>賑わいを見る</span></button><button class="tab" data-sort="growth" aria-pressed="false">急上昇 <span>1時間前と比較</span></button></div>
+        <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="ワールド名・作者で検索" aria-label="ワールド名・作者で検索"></label>
+      </div>
+      <div class="filters"><div class="chips" role="group" aria-label="対応端末"><button class="chip active" data-platform="all" aria-pressed="true">すべて</button><button class="chip" data-platform="pc" aria-pressed="false">PC</button><button class="chip" data-platform="quest" aria-pressed="false">Quest</button><button class="chip" data-platform="ios" aria-pressed="false">iOS</button><button class="chip" id="saved-filter" aria-pressed="false">☆ 保存したワールド</button></div><span class="column-note">人数は複数インスタンスの合計です</span></div>
+      <div class="table-wrap"><table><thead><tr><th class="rank-col" scope="col">順位</th><th class="world-col" scope="col">ワールド</th><th class="number-col" scope="col">総同接</th><th class="number-col public-col" scope="col">パブリック</th><th class="number-col change-col" scope="col">1時間前比</th><th class="trend-col" scope="col">24時間の推移</th><th class="save-col" scope="col"><span class="sr-only">保存</span></th></tr></thead><tbody id="ranking-body"></tbody></table><div id="empty" class="empty" hidden></div></div>
+      <div class="table-footer"><span id="coverage">アクティブ一覧の取得範囲内で集計します</span><span>表示時刻：日本時間（JST）</span></div>
+    </section>
+    <section class="guide"><div class="guide-symbol" aria-hidden="true">i</div><div><h3>総同接とパブリック、どう違う？</h3><p>総同接は非公開側も含むワールド全体の人数。パブリック人数はAPIの公開側集計です。公開側に人がいても、満員や参加条件によって入れる部屋が見つからない場合があります。</p></div></section>
+    <footer><span class="footer-brand">World Watch</span><p>VRChatの非公式ランキング。VRChat Inc.とは関係ありません。</p><button class="text-button" id="about-footer">集計方法・データについて ↗</button></footer>
+  </main>
+  <dialog id="detail-dialog"><div class="dialog-top"><span class="eyebrow">WORLD DETAILS</span><button class="close-button" data-close aria-label="詳細を閉じる">×</button></div><div id="detail-content"></div></dialog>
+  <dialog id="about-dialog"><div class="dialog-top"><span class="eyebrow">ABOUT THE CHARTS</span><button class="close-button" data-close aria-label="説明を閉じる">×</button></div><h2>このランキングについて</h2><div class="about-copy"><p>1時間ごとにVRChatのアクティブ一覧を最大500件取得し、名前・説明・タグなどに日本語や日本向けの明示があるワールドを抽出します。手動の追加・除外設定も反映します。</p><p>総同接・パブリック順はそれぞれ上位100件を表示。検索や対応端末フィルターはその100件の中を絞り込みます。急上昇は総同接の1時間前比で、両時点の観測があるワールドを対象にします。</p><p>このランキングは取得した候補内の順位です。日本語向けワールド全体の網羅性は保証しません。アクティブ一覧から外れたワールドは0人扱いにせず、今回のランキングから外します。</p><p>公開側・非公開側はAPIの集計値を表示しています。インスタンス種別との厳密な対応は確認中です。過去の推移は観測時点の数値で、欠測区間は線をつなぎません。ピークは毎時の観測値の最大です。</p><p>対応端末はワールドの対応情報で、利用者の端末別人数ではありません。保存機能はこのブラウザー内だけに保存されます。</p><p><a href="https://hello.vrchat.com/creator-guidelines" target="_blank" rel="noopener noreferrer">VRChat API利用ガイドライン ↗</a></p></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body></html>

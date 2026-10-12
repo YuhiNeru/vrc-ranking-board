@@ -1,0 +1,23 @@
+[Unit]
+Description=World Watch hourly VRChat ranking collector
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=worldcompass
+Group=worldcompass
+WorkingDirectory=/opt/vrc-ranking-board
+ExecStart=/usr/bin/python3 /opt/vrc-ranking-board/ranking_collector.py --config /var/lib/vrc-ranking-board/config.json
+TimeoutStartSec=50min
+Nice=10
+MemoryMax=192M
+CPUQuota=25%
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/opt/world-compass-collector /var/lib/world-compass-collector
+ReadWritePaths=/var/lib/vrc-ranking-board
+UMask=0077
+
