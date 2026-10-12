@@ -4,6 +4,8 @@
 
 公開URL：https://vrc-ranking-board.vrc-ranking-board.workers.dev/
 
+関連データリポジトリ：[vrc-ranking-data](https://github.com/yuhi-neru/vrc-ranking-data)。VPSで集計した公開データを毎時同期し、JSON／CSVとして別管理しています。
+
 ## ローカル起動
 
 ```powershell
