@@ -57,7 +57,7 @@ D1を作り、`wrangler.jsonc` の `account_id` と `database_id` を公開先�
 
 他のアカウントへ公開する際は、設定のアカウントID・DB IDを自分のものに置き換えてください。秘密鍵・Cookie・送信用tokenはリポジトリへ登録しません。公開画面にはVRChat認証情報は不要です。
 
-本サイトのVPSには送信先と専用tokenを設定済みです。毎時の集計完了時にCloudflareへ送信するため、PCを起動し続ける必要はありません。コード変更の自動公開は、CloudflareのWorker設定「Builds」でGitHubの `yuhi-neru/vrc-ranking-board` を連携すると有効になります。GitHub Actionsの検証だけでは本番公開されません。
+本サイトのVPSには送信先と専用tokenを設定済みです。毎時の集計完了時にCloudflareへ送信するため、PCを起動し続ける必要はありません。CloudflareのWorker設定「Builds」でGitHubの `yuhi-neru/vrc-ranking-board` を接続済みです。`main` へのpushで `npm test` を実行し、成功すると `npm run deploy` で自動公開します。GitHub Actionsでも別途Pythonを含む検証を行います。
 
 ## 検証
 
