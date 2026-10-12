@@ -20,4 +20,3 @@ ProtectHome=true
 ReadOnlyPaths=/opt/world-compass-collector /var/lib/world-compass-collector
 ReadWritePaths=/var/lib/vrc-ranking-board
 UMask=0077
-

@@ -50,6 +50,6 @@ export default {async fetch(request,env){
   const secured=new Response(response.body,response);
   secured.headers.set('X-Content-Type-Options','nosniff');
   secured.headers.set('Referrer-Policy','strict-origin-when-cross-origin');
-  secured.headers.set('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://api.vrchat.cloud; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'");
+  secured.headers.set('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://api.vrchat.cloud https://files.vrchat.cloud; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'");
   return secured;
 }};

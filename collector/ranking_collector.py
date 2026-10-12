@@ -266,7 +266,7 @@ def upload(url, token_file, payload):
     if len(token) < 32:
         raise ValueError('Ingest token too short')
     body = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).encode()
-    request = urllib.request.Request(url, data=body, headers={'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'}, method='POST')
+    request = urllib.request.Request(url, data=body, headers={'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', 'User-Agent': 'VRC-Ranking-Board/1.0 (+https://github.com/yuhi-neru/vrc-ranking-board)'}, method='POST')
     opener = urllib.request.build_opener(NoRedirect())
     with opener.open(request, timeout=30) as response:
         if response.status != 200:

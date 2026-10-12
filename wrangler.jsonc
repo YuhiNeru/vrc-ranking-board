@@ -5,8 +5,7 @@
   "workers_dev": true,
   "main": "worker/index.js",
   "compatibility_date": "2026-10-12",
-  "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+  "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": true },
   "d1_databases": [{ "binding": "DB", "database_name": "vrc-ranking-board", "database_id": "66af2aca-84c5-498e-846d-3fa2a34b3234", "migrations_dir": "migrations" }],
   "observability": { "enabled": true, "traces": { "enabled": true } }
 }
-
